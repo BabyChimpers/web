@@ -99,7 +99,8 @@ a:hover {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: transparent;
+  background: linear-gradient(60deg,#FFA500,#FFD700);
+  border-raidus: 3px;
   width: fit-content;
   max-height: 0;
   overflow: hidden;
