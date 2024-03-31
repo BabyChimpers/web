@@ -361,6 +361,8 @@ article {
 
 article .icon {
   cursor: default;
+  height: 64px;
+  width: 64px;
 }
 
 /* PROJECTS SECTION */
@@ -377,8 +379,8 @@ article .icon {
 
 .project-img {
   border-radius: 2rem;
-  width: 25%;
-  height: 25%;
+  width: 90%;
+  height: 90%;
 }
 
 .project-title {
