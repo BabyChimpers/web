@@ -229,11 +229,13 @@ section {
   padding: 1rem;
   width: 8rem;
   border-radius: 2rem;
+  font-family: "Pixelify Sans","Poppins", sans-serif;
 }
 
 .btn-color-1,
 .btn-color-2 {
   border: rgb(53, 53, 53) 0.1rem solid;
+  font-family: "Pixelify Sans","Poppins", sans-serif;
 }
 
 .btn-color-1:hover,
