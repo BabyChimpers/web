@@ -63,6 +63,12 @@
         .wallet-info p {
             margin: 5px 0;
         }
+        .action-buttons {
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +80,10 @@
             <h2>Wallet Information</h2>
             <p><strong>Address:</strong> <span id="walletAddress"></span></p>
             <p><strong>ETH Balance:</strong> <span id="ethBalance"></span></p>
+        </div>
+        <div class="action-buttons" style="display: none;">
+            <button onclick="stakeNFT()">Stake NFT</button>
+            <button onclick="unstakeNFT()">Unstake NFT</button>
         </div>
     </div>
 
@@ -107,6 +117,8 @@
                 document.getElementById('connectButton').style.display = 'none';
                 // Show wallet information
                 showWalletInfo(accounts[0]);
+                // Show action buttons
+                document.querySelector('.action-buttons').style.display = 'block';
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
@@ -127,6 +139,18 @@
             document.getElementById('ethBalance').innerText = `${ethBalance} ETH`;
             // Show wallet info div
             document.querySelector('.wallet-info').style.display = 'block';
+        }
+
+        // Function to handle staking NFT
+        function stakeNFT() {
+            // Add your staking logic here
+            console.log('Stake NFT button clicked');
+        }
+
+        // Function to handle unstaking NFT
+        function unstakeNFT() {
+            // Add your unstaking logic here
+            console.log('Unstake NFT button clicked');
         }
     </script>
 </body>
