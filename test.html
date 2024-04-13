@@ -30,6 +30,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #0056b3;
@@ -80,10 +81,10 @@
                 // Show success message
                 document.getElementById('message').innerText = 'Wallet connected successfully!';
                 document.getElementById('message').style.display = 'block';
-                // Hide the Connect Wallet button
-                document.getElementById('connectButton').style.display = 'none';
                 // Change title to Stake NFTs
                 document.getElementById('title').innerText = 'Stake NFTs';
+                // Hide the Connect Wallet button
+                document.getElementById('connectButton').style.display = 'none';
                 // Show card UI for staking or unstaking NFTs
                 showStakingCards();
             } catch (error) {
@@ -101,16 +102,26 @@
             const stakingCardHTML = `
                 <div class="card">
                     <h2>Stake NFT</h2>
-                    <!-- Add form or button for staking NFT -->
-                    <!-- Example: <button onclick="stakeNFT()">Stake NFT</button> -->
+                    <button onclick="stakeNFT()">Stake NFT</button>
                 </div>
                 <div class="card">
                     <h2>Unstake NFT</h2>
-                    <!-- Add form or button for unstaking NFT -->
-                    <!-- Example: <button onclick="unstakeNFT()">Unstake NFT</button> -->
+                    <button onclick="unstakeNFT()">Unstake NFT</button>
                 </div>
             `;
             container.insertAdjacentHTML('beforeend', stakingCardHTML);
+        }
+
+        // Function to handle staking NFT
+        function stakeNFT() {
+            // Add your staking logic here
+            console.log('Stake NFT button clicked');
+        }
+
+        // Function to handle unstaking NFT
+        function unstakeNFT() {
+            // Add your unstaking logic here
+            console.log('Unstake NFT button clicked');
         }
     </script>
 </body>
