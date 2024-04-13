@@ -98,6 +98,12 @@
             margin-top: 20px;
             background-color: #f9f9f9;
         }
+        .dashboard-section {
+            margin-top: 20px;
+        }
+        .dashboard-section h3 {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -130,10 +136,15 @@
         <div class="dashboard" id="dashboard">
             <div class="dashboard-content">
                 <h2>Dashboard</h2>
-                <p><strong>Staked NFTs:</strong> <span id="stakedNFTs"></span></p>
-                <p><strong>Accumulated Rewards:</strong> <span id="accumulatedRewards"></span> Tokens</p>
-                <p><strong>NFTs Held:</strong> <span id="nftsHeld"></span></p>
-                <button onclick="claimRewards()">Claim Rewards</button>
+                <div class="dashboard-section">
+                    <h3>Staked NFTs</h3>
+                    <p><strong>NFT ID:</strong> <span id="stakedNFTs"></span></p>
+                </div>
+                <div class="dashboard-section">
+                    <h3>Accumulated Rewards</h3>
+                    <p><strong>Rewards:</strong> <span id="accumulatedRewards"></span> Tokens</p>
+                    <button onclick="claimRewards()">Claim Rewards</button>
+                </div>
             </div>
         </div>
     </div>
