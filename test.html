@@ -15,6 +15,9 @@
         }
         .container {
             text-align: center;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
         }
         h1 {
             margin-bottom: 20px;
@@ -27,7 +30,6 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
-            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
@@ -36,7 +38,6 @@
             padding: 8px;
             border-radius: 4px;
             border: 1px solid #ccc;
-            transition: border-color 0.3s ease;
         }
         input[type="text"]:focus {
             border-color: #007bff;
@@ -64,20 +65,12 @@
             padding: 20px;
             margin-top: 20px;
             text-align: left;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-        .wallet-info.show {
-            opacity: 1;
+            display: none;
         }
         /* Action buttons styles */
         .action-buttons {
             margin-top: 20px;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-        .action-buttons.show {
-            opacity: 1;
+            display: none;
         }
         /* NFT input styles */
         .nft-input {
@@ -86,11 +79,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             background-color: #fff;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-        .nft-input.show {
-            opacity: 1;
+            display: none;
         }
     </style>
 </head>
@@ -101,13 +90,13 @@
         </div>
     </header>
     <div class="container">
-        <button id="connectButton">Connect Wallet</button>
         <div id="message"></div>
         <div class="wallet-info">
             <h2>Wallet Information</h2>
             <p><strong>Address:</strong> <span id="walletAddress"></span></p>
             <p><strong>ETH Balance:</strong> <span id="ethBalance"></span></p>
         </div>
+        <button id="connectButton">Connect Wallet</button>
         <div class="action-buttons">
             <button onclick="toggleNFTInput('stake')">Stake NFT</button>
             <button onclick="toggleNFTInput('unstake')">Unstake NFT</button>
@@ -150,7 +139,7 @@
                 // Show wallet information
                 showWalletInfo(accounts[0]);
                 // Show action buttons
-                document.querySelector('.action-buttons').classList.add('show');
+                document.querySelector('.action-buttons').style.display = 'block';
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
@@ -169,20 +158,20 @@
             // Display ETH balance
             document.getElementById('ethBalance').innerText = `${ethBalance} ETH`;
             // Show wallet info div
-            document.querySelector('.wallet-info').classList.add('show');
+            document.querySelector('.wallet-info').style.display = 'block';
         }
 
         // Function to toggle display of NFT input div
         function toggleNFTInput(action) {
             // Hide all NFT input divs
             document.querySelectorAll('.nft-input').forEach((div) => {
-                div.classList.remove('show');
+                div.style.display = 'none';
             });
             // Show the corresponding NFT input div
             if (action === 'stake') {
-                document.getElementById('stakeNFTInput').classList.add('show');
+                document.getElementById('stakeNFTInput').style.display = 'block';
             } else if (action === 'unstake') {
-                document.getElementById('unstakeNFTInput').classList.add('show');
+                document.getElementById('unstakeNFTInput').style.display = 'block';
             }
         }
 
