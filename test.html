@@ -105,6 +105,7 @@
         } else {
             console.error('No Ethereum provider detected. You should consider trying MetaMask!');
         }
+        var CONTRACT_ABI = '';
 
         // Initialize contract instance
         const contract = new web3.eth.Contract(CONTRACT_ABI, contractAddress);
