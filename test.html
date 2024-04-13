@@ -56,23 +56,12 @@
             text-align: center;
             color: #007bff;
         }
-        .rainbowkit-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #ff8800;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Stake Your NFTs</h1>
-        <button id="rainbowkit-button" class="rainbowkit-button">Connect Wallet</button>
+        <button id="connectButton" style="display: none;">Connect Wallet</button>
         <form id="stakeForm" style="display: none;">
             <label for="nftId">Enter NFT ID:</label>
             <input type="number" id="nftId" required>
@@ -80,9 +69,6 @@
         </form>
         <div id="message"></div>
     </div>
-
-    <!-- Include RainbowKit SDK -->
-    <script src="https://cdn.rainbow.me/sdk/latest/rainbowkit.min.js"></script>
 
     <!-- Include Web3.js library -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
@@ -105,29 +91,34 @@
         } else {
             console.error('No Ethereum provider detected. You should consider trying MetaMask!');
         }
-        var CONTRACT_ABI = '';
 
         // Initialize contract instance
         const contract = new web3.eth.Contract(CONTRACT_ABI, contractAddress);
 
-        // RainbowKit Connect Wallet button
-        document.getElementById('rainbowkit-button').addEventListener('click', async () => {
-            const rainbow = new RainbowKit();
+        // Check if MetaMask is connected
+        if (web3 && web3.eth.accounts.length > 0) {
+            showStakeForm();
+        } else {
+            document.getElementById('connectButton').style.display = 'block';
+        }
+
+        // Handle Connect Wallet button click
+        document.getElementById('connectButton').addEventListener('click', async () => {
             try {
-                await rainbow.connect();
-                // Show stake form after successful connection
-                document.getElementById('stakeForm').style.display = 'block';
+                // Request connection to MetaMask
+                await window.ethereum.enable();
+                showStakeForm();
             } catch (error) {
-                console.error('Failed to connect RainbowKit:', error);
+                console.error('Failed to connect MetaMask:', error);
                 // Show error message
                 document.getElementById('message').innerHTML = 'Error: Failed to connect wallet';
             }
         });
-      // Handle form submission
+
+        // Handle form submission
         document.getElementById('stakeForm').addEventListener('submit', async (event) => {
             event.preventDefault();
             const nftId = document.getElementById('nftId').value;
-
             try {
                 // Stake NFT
                 const accounts = await web3.eth.getAccounts();
@@ -141,6 +132,12 @@
                 document.getElementById('message').innerHTML = 'Error: ' + error.message;
             }
         });
+
+        // Function to show the stake form
+        function showStakeForm() {
+            document.getElementById('connectButton').style.display = 'none';
+            document.getElementById('stakeForm').style.display = 'block';
+        }
     </script>
 </body>
 </html>
