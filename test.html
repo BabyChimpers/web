@@ -98,6 +98,34 @@
             margin-top: 20px;
             background-color: #f9f9f9;
         }
+        .hoverable-div {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .hoverable-div:hover .hoverable-content {
+            display: block;
+        }
+        .hoverable-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+        }
+        .staked-nft {
+            margin-top: 20px;
+        }
+        .staked-nft h3 {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -130,10 +158,22 @@
         <div class="dashboard" id="dashboard">
             <div class="dashboard-content">
                 <h2>Dashboard</h2>
-                <p><strong>Staked NFTs:</strong> <span id="stakedNFTs"></span></p>
-                <p><strong>Accumulated Rewards:</strong> <span id="accumulatedRewards"></span> Tokens</p>
-                <p><strong>NFTs Held:</strong> <span id="nftsHeld"></span></p>
-                <button onclick="claimRewards()">Claim Rewards</button>
+                <div class="hoverable-div">
+                    <div class="hoverable-content">
+                        <p>NFTs Held: <span id="nftsHeld"></span></p>
+                        <p>Total NFTs Staked: <span id="totalNFTStaked"></span></p>
+                    </div>
+                </div>
+                <div class="hoverable-div">
+                    <div class="hoverable-content">
+                        <p>Accumulated Rewards: <span id="accumulatedRewards"></span> Tokens</p>
+                        <button onclick="claimRewards()">Claim Rewards</button>
+                    </div>
+                </div>
+                <div class="staked-nft">
+                    <h3>Staked NFT ID</h3>
+                    <!-- You can dynamically populate this section with staked NFT IDs -->
+                </div>
             </div>
         </div>
     </div>
