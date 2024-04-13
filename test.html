@@ -39,11 +39,19 @@
             color: #007bff;
             display: none;
         }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Connect Your Wallet</h1>
+        <h1 id="title">Connect Your Wallet</h1>
         <button id="connectButton">Connect Wallet</button>
         <div id="message"></div>
     </div>
@@ -74,6 +82,10 @@
                 document.getElementById('message').style.display = 'block';
                 // Hide the Connect Wallet button
                 document.getElementById('connectButton').style.display = 'none';
+                // Change title to Stake NFTs
+                document.getElementById('title').innerText = 'Stake NFTs';
+                // Show card UI for staking or unstaking NFTs
+                showStakingCards();
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
@@ -81,6 +93,25 @@
                 document.getElementById('message').style.display = 'block';
             }
         });
+
+        // Function to show card UI for staking or unstaking NFTs
+        function showStakingCards() {
+            // You can customize this part to display the UI according to your requirements
+            const container = document.querySelector('.container');
+            const stakingCardHTML = `
+                <div class="card">
+                    <h2>Stake NFT</h2>
+                    <!-- Add form or button for staking NFT -->
+                    <!-- Example: <button onclick="stakeNFT()">Stake NFT</button> -->
+                </div>
+                <div class="card">
+                    <h2>Unstake NFT</h2>
+                    <!-- Add form or button for unstaking NFT -->
+                    <!-- Example: <button onclick="unstakeNFT()">Unstake NFT</button> -->
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', stakingCardHTML);
+        }
     </script>
 </body>
 </html>
