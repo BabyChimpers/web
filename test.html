@@ -66,10 +66,14 @@
         document.getElementById('connectButton').addEventListener('click', async () => {
             try {
                 // Request connection to MetaMask
-                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                // Log the connected address
+                console.log('Connected Address:', accounts[0]);
                 // Show success message
                 document.getElementById('message').innerText = 'Wallet connected successfully!';
                 document.getElementById('message').style.display = 'block';
+                // Hide the Connect Wallet button
+                document.getElementById('connectButton').style.display = 'none';
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
