@@ -48,6 +48,21 @@
             margin-bottom: 20px;
             text-align: left;
         }
+        .wallet-info {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .wallet-info h2 {
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        .wallet-info p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -55,6 +70,11 @@
         <h1 id="title">Connect Your Wallet</h1>
         <button id="connectButton">Connect Wallet</button>
         <div id="message"></div>
+        <div class="wallet-info" style="display: none;">
+            <h2>Wallet Information</h2>
+            <p><strong>Address:</strong> <span id="walletAddress"></span></p>
+            <p><strong>ETH Balance:</strong> <span id="ethBalance"></span></p>
+        </div>
     </div>
 
     <!-- Include Web3.js library -->
@@ -85,8 +105,8 @@
                 document.getElementById('title').innerText = 'Stake NFTs';
                 // Hide the Connect Wallet button
                 document.getElementById('connectButton').style.display = 'none';
-                // Show card UI for staking or unstaking NFTs
-                showStakingCards();
+                // Show wallet information
+                showWalletInfo(accounts[0]);
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
@@ -95,33 +115,18 @@
             }
         });
 
-        // Function to show card UI for staking or unstaking NFTs
-        function showStakingCards() {
-            // You can customize this part to display the UI according to your requirements
-            const container = document.querySelector('.container');
-            const stakingCardHTML = `
-                <div class="card">
-                    <h2>Stake NFT</h2>
-                    <button onclick="stakeNFT()">Stake NFT</button>
-                </div>
-                <div class="card">
-                    <h2>Unstake NFT</h2>
-                    <button onclick="unstakeNFT()">Unstake NFT</button>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', stakingCardHTML);
-        }
-
-        // Function to handle staking NFT
-        function stakeNFT() {
-            // Add your staking logic here
-            console.log('Stake NFT button clicked');
-        }
-
-        // Function to handle unstaking NFT
-        function unstakeNFT() {
-            // Add your unstaking logic here
-            console.log('Unstake NFT button clicked');
+        // Function to show wallet information
+        async function showWalletInfo(address) {
+            // Display wallet address
+            document.getElementById('walletAddress').innerText = address;
+            // Get ETH balance
+            const balance = await web3.eth.getBalance(address);
+            // Convert balance from wei to ETH
+            const ethBalance = web3.utils.fromWei(balance, 'ether');
+            // Display ETH balance
+            document.getElementById('ethBalance').innerText = `${ethBalance} ETH`;
+            // Show wallet info div
+            document.querySelector('.wallet-info').style.display = 'block';
         }
     </script>
 </body>
