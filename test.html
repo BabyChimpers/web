@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Wallet</title>
+    <title>Stake NFTs</title>
     <style>
-        /* Add your custom CSS styles here */
-        /* Example styles */
+        /* Global styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
         }
         .container {
             text-align: center;
@@ -31,23 +27,36 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
-        #message {
-            margin-top: 20px;
-            color: #007bff;
-            display: none;
+        input[type="text"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease;
         }
-        .card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: left;
+        input[type="text"]:focus {
+            border-color: #007bff;
         }
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        /* Wallet info styles */
         .wallet-info {
             background-color: #f9f9f9;
             border: 1px solid #ccc;
@@ -55,47 +64,51 @@
             padding: 20px;
             margin-top: 20px;
             text-align: left;
+            transition: opacity 0.3s ease;
+            opacity: 0;
         }
-        .wallet-info h2 {
-            margin-bottom: 10px;
-            color: #007bff;
+        .wallet-info.show {
+            opacity: 1;
         }
-        .wallet-info p {
-            margin: 5px 0;
-        }
+        /* Action buttons styles */
         .action-buttons {
             margin-top: 20px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
         }
-        .action-buttons button {
-            margin-right: 10px;
+        .action-buttons.show {
+            opacity: 1;
         }
+        /* NFT input styles */
         .nft-input {
-            display: none;
             margin-top: 20px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             background-color: #fff;
+            transition: opacity 0.3s ease;
+            opacity: 0;
         }
-        .nft-input input {
-            margin-bottom: 10px;
-            padding: 5px;
-            width: 100%;
-            box-sizing: border-box;
+        .nft-input.show {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1 class="title">Stake NFTs</h1>
+        </div>
+    </header>
     <div class="container">
-        <h1 id="title">Connect Your Wallet</h1>
         <button id="connectButton">Connect Wallet</button>
         <div id="message"></div>
-        <div class="wallet-info" style="display: none;">
+        <div class="wallet-info">
             <h2>Wallet Information</h2>
             <p><strong>Address:</strong> <span id="walletAddress"></span></p>
             <p><strong>ETH Balance:</strong> <span id="ethBalance"></span></p>
         </div>
-        <div class="action-buttons" style="display: none;">
+        <div class="action-buttons">
             <button onclick="toggleNFTInput('stake')">Stake NFT</button>
             <button onclick="toggleNFTInput('unstake')">Unstake NFT</button>
         </div>
@@ -132,20 +145,16 @@
                 console.log('Connected Address:', accounts[0]);
                 // Show success message
                 document.getElementById('message').innerText = 'Wallet connected successfully!';
-                document.getElementById('message').style.display = 'block';
                 // Change title to Stake NFTs
-                document.getElementById('title').innerText = 'Stake NFTs';
-                // Hide the Connect Wallet button
-                document.getElementById('connectButton').style.display = 'none';
+                document.querySelector('.title').innerText = 'Stake NFTs';
                 // Show wallet information
                 showWalletInfo(accounts[0]);
                 // Show action buttons
-                document.querySelector('.action-buttons').style.display = 'block';
+                document.querySelector('.action-buttons').classList.add('show');
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
                 document.getElementById('message').innerText = 'Error: Failed to connect wallet';
-                document.getElementById('message').style.display = 'block';
             }
         });
 
@@ -160,20 +169,20 @@
             // Display ETH balance
             document.getElementById('ethBalance').innerText = `${ethBalance} ETH`;
             // Show wallet info div
-            document.querySelector('.wallet-info').style.display = 'block';
+            document.querySelector('.wallet-info').classList.add('show');
         }
 
         // Function to toggle display of NFT input div
         function toggleNFTInput(action) {
             // Hide all NFT input divs
             document.querySelectorAll('.nft-input').forEach((div) => {
-                div.style.display = 'none';
+                div.classList.remove('show');
             });
             // Show the corresponding NFT input div
             if (action === 'stake') {
-                document.getElementById('stakeNFTInput').style.display = 'block';
+                document.getElementById('stakeNFTInput').classList.add('show');
             } else if (action === 'unstake') {
-                document.getElementById('unstakeNFTInput').style.display = 'block';
+                document.getElementById('unstakeNFTInput').classList.add('show');
             }
         }
 
