@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFT Staking</title>
+    <title>Connect Wallet</title>
     <style>
         /* Add your custom CSS styles here */
         /* Example styles */
@@ -18,30 +18,13 @@
             height: 100vh;
         }
         .container {
-            max-width: 600px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         h1 {
-            text-align: center;
             margin-bottom: 20px;
         }
-        label {
-            font-weight: bold;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
         button {
-            display: block;
-            width: 100%;
-            padding: 10px;
+            padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -53,20 +36,15 @@
         }
         #message {
             margin-top: 20px;
-            text-align: center;
             color: #007bff;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Stake Your NFTs</h1>
-        <button id="connectButton" style="display: none;">Connect Wallet</button>
-        <form id="stakeForm" style="display: none;">
-            <label for="nftId">Enter NFT ID:</label>
-            <input type="number" id="nftId" required>
-            <button type="submit">Stake NFT</button>
-        </form>
+        <h1>Connect Your Wallet</h1>
+        <button id="connectButton">Connect Wallet</button>
         <div id="message"></div>
     </div>
 
@@ -74,72 +52,31 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 
     <script>
-        // Ethereum smart contract address
-        const contractAddress = 'CONTRACT_ADDRESS';
-        // Ethereum network (Ethereum mainnet = 1, Ropsten testnet = 3, etc.)
-        const networkId = 1; // Change it according to your network
-
-        const CONTRACT_ABI = '';
-
         // Initialize Web3
         let web3;
         if (window.ethereum) {
             web3 = new Web3(window.ethereum);
-            window.ethereum.enable().catch(error => {
-                console.error('Failed to enable Ethereum:', error);
-            });
         } else if (window.web3) {
             web3 = new Web3(window.web3.currentProvider);
         } else {
             console.error('No Ethereum provider detected. You should consider trying MetaMask!');
         }
 
-        // Initialize contract instance
-        // const contract = new web3.eth.Contract(CONTRACT_ABI, contractAddress);
-
-        // Check if MetaMask is connected
-        if (web3 && web3.eth.accounts.length > 0) {
-            showStakeForm();
-        } else {
-            document.getElementById('connectButton').style.display = 'block';
-        }
-
         // Handle Connect Wallet button click
         document.getElementById('connectButton').addEventListener('click', async () => {
             try {
                 // Request connection to MetaMask
-                await window.ethereum.enable();
-                showStakeForm();
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                // Show success message
+                document.getElementById('message').innerText = 'Wallet connected successfully!';
+                document.getElementById('message').style.display = 'block';
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
-                document.getElementById('message').innerHTML = 'Error: Failed to connect wallet';
+                document.getElementById('message').innerText = 'Error: Failed to connect wallet';
+                document.getElementById('message').style.display = 'block';
             }
         });
-
-        // Handle form submission
-        document.getElementById('stakeForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const nftId = document.getElementById('nftId').value;
-            try {
-                // Stake NFT
-                const accounts = await web3.eth.getAccounts();
-                const result = await contract.methods.stake([nftId]).send({ from: accounts[0] });
-
-                // Show success message
-                document.getElementById('message').innerHTML = 'NFT successfully staked!';
-            } catch (error) {
-                console.error('Error staking NFT:', error);
-                // Show error message
-                document.getElementById('message').innerHTML = 'Error: ' + error.message;
-            }
-        });
-
-        // Function to show the stake form
-        function showStakeForm() {
-            document.getElementById('connectButton').style.display = 'none';
-            document.getElementById('stakeForm').style.display = 'block';
-        }
     </script>
 </body>
 </html>
