@@ -66,6 +66,10 @@
             margin-top: 20px;
             text-align: left;
             display: none;
+            overflow-wrap: break-word; /* Wrap long text */
+        }
+        .wallet-info p {
+            margin: 5px 0;
         }
         /* Action buttons styles */
         .action-buttons {
@@ -94,7 +98,7 @@
         <div class="wallet-info">
             <h2>Wallet Information</h2>
             <p><strong>Address:</strong> <span id="walletAddress"></span></p>
-            <p><strong>ETH Balance:</strong> <span id="ethBalance"></span></p>
+            <p><strong>ETH Balance:</strong> <span id="ethBalance"></span> ETH</p>
         </div>
         <button id="connectButton">Connect Wallet</button>
         <div class="action-buttons">
@@ -153,10 +157,10 @@
             document.getElementById('walletAddress').innerText = address;
             // Get ETH balance
             const balance = await web3.eth.getBalance(address);
-            // Convert balance from wei to ETH
-            const ethBalance = web3.utils.fromWei(balance, 'ether');
+            // Convert balance from wei to ETH and round to 3 decimal places
+            const ethBalance = (parseFloat(web3.utils.fromWei(balance, 'ether'))).toFixed(3);
             // Display ETH balance
-            document.getElementById('ethBalance').innerText = `${ethBalance} ETH`;
+            document.getElementById('ethBalance').innerText = ethBalance;
             // Show wallet info div
             document.querySelector('.wallet-info').style.display = 'block';
         }
