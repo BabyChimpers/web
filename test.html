@@ -178,6 +178,12 @@
                 showWalletInfo(accounts[0]);
                 // Show action buttons
                 document.querySelector('.action-buttons').style.display = 'block';
+                // Change connect button text to "Connected"
+                document.getElementById('connectButton').innerText = 'Connected';
+                // Remove connected button after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('connectButton').style.display = 'none';
+                }, 5000);
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
