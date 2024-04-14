@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stake NFTs</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
         /* Global styles */
         body {
-            font-family: "VT323","Pixelify Sans", sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
@@ -25,7 +23,6 @@
             margin-bottom: 20px;
         }
         button {
-            font-family: "Pixelify Sans", monospace;
             padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
@@ -107,6 +104,14 @@
         .dashboard-section h3 {
             margin-bottom: 10px;
         }
+        .dashboard-context {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -139,6 +144,10 @@
         <div class="dashboard" id="dashboard">
             <div class="dashboard-content">
                 <h2>Dashboard</h2>
+                <div class="dashboard-context">
+                    <h3>Dashboard Context</h3>
+                    <p>This is a sample context for the dashboard.</p>
+                </div>
                 <div class="dashboard-section">
                     <h3>Staked NFTs</h3>
                     <p><strong>NFT ID:</strong> <span id="stakedNFTs"></span></p>
