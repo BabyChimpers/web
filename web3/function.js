@@ -81,4 +81,17 @@ async function approveall() {
         document.getElementById('message').innerText = 'Error approving!';
     }
 }
+
+async function numberHeld() {
+    try {
+        const event = nft.methods.balanceOf(connectedAccount).call({ from: connectedAccount}).then(function(result){
+            console.log(result);
+            document.getElementById('numberHeld').textContent = result;
+        });
+    } catch(error) {
+        console.error(error);
+    }
+}
+
 setInterval(accumulatedRewards, 5000);
+setInterval(numberHeld, 5000);
