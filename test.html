@@ -201,8 +201,9 @@
             try {
                 web3 = new Web3(window.ethereum);
                 // Request connection to MetaMask
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                connectedAccount = accounts[0]; // Store the connected account globally
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                var accounts = await web3.eth.getAccounts(); 
+                connectedAccount = accounts[0];  // Store the connected account globally
 
                 // Show success message
                 document.getElementById('message').innerText = 'Wallet connected successfully!';
