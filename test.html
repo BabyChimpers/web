@@ -195,6 +195,7 @@
 
         // Store connected account globally
         var connectedAccount = null;
+        var isConnected = false;
 
         // Handle Connect Wallet button click
         document.getElementById('connectButton').addEventListener('click', async () => {
@@ -219,6 +220,7 @@
                 setTimeout(() => {
                     document.getElementById('connectButton').style.display = 'none';
                 }, 5000);
+                isConnected = true;
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message
