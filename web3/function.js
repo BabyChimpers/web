@@ -64,8 +64,21 @@ async function claimRewards() {
         });
         accumulatedRewards();
     } catch(error) {
-        console.error('unable to claim', error);
-        document.getElementById('message').innerText = 'unable to claim' + error;
+        console.error('unable to claim: ', error);
+        document.getElementById('message').innerText = 'unable to claim';
+    }
+}
+
+async function approveall() {
+    try {
+        document.getElementById('message').innerHTML = 'Approving all...';
+        const event = nft.methods.setApprovalForAll("0x4FD2223a8c71b53C22ce0957C7B811A1936AbB65", true).send({from: connectedAccount}).then(function(result){
+            document.getElementById('message').innerText = 'Approved!';
+            console.log(result);
+        });
+    } catch(error) {
+        console.error('unable to approve: ', error);
+        document.getElementById('message').innerText = 'Error approving!';
     }
 }
 setInterval(accumulatedRewards, 5000);
