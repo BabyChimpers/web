@@ -223,6 +223,7 @@
                     document.getElementById('connectButton').style.display = 'none';
                 }, 5000);
                 staked();
+                globalStaked();
                 accumulatedRewards();
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);

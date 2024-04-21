@@ -101,3 +101,4 @@ async function numberHeld() {
 
 setInterval(accumulatedRewards, 5000);
 setInterval(numberHeld, 5000);
+setInterval(globalStaked, 30000);
