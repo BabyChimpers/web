@@ -12,7 +12,7 @@ async function accumulatedRewards() {
         var rewards = nftstake.methods.calculateTokens().call({
             from: connectedAccount
         }).then(function(result){
-            document.getElementById('accumulatedRewards').innnerText = result;
+            document.getElementById('accumulatedRewards').textContent = (result/10**18) + " CFUN";
         }); 
     } catch(error){
         console.error(error);
