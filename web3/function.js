@@ -39,6 +39,8 @@ async function stakeNFT() {
         console.log("Staked NFT ID:", nftID);
         // Handle successful staking
         document.getElementById('message').innerText = 'NFT staked successfully!';
+        globalStaked();
+        staked();
     } catch (error) {
         console.error("An error occurred:", error);
         document.getElementById('message').innerText = 'Error staking NFT!';
@@ -54,6 +56,8 @@ async function unstakeNFT() {
         });
         console.log("unStaked NFT ID:", nftID);
         document.getElementById('message').innerText = 'NFT unstaked!';
+        globalStaked();
+        staked();
     } catch (error) {
         console.error("an error occurred:", error);
         document.getElementById('message').innerText = 'Unable to unstake!';
