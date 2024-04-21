@@ -260,22 +260,6 @@
                 dashboard.style.display = 'block';
             }
         }
-
-        // Function to claim rewards
-        async function claimRewards() {
-            try {
-                // Call the claim function from the stake contract
-                await stakeContract.methods.claimTokens().send({
-                    from: connectedAccount // Use the global connected account
-                });
-                console.log('Rewards claimed');
-                // Handle successful claim
-                document.getElementById('message').innerText = 'Rewards claimed successfully!';
-            } catch (error) {
-                console.error("An error occurred:", error);
-                document.getElementById('message').innerText = 'Error claiming rewards';
-            }
-        }
     </script>
     <script src="../web3/nftstake.js"></script>
     <script src="../web3/nft.js"></script>

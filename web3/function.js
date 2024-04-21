@@ -13,6 +13,13 @@ async function staked() {
     });
 }
 
+async function idHeld() {
+    var held = nft.methods.ownedNFTIdList(connectedAccount).call({from: connectedAccount}).then(function(result){
+        console.log(result);
+        document.getElementById('idHeld').textContent = result;
+    });
+}
+
 async function accumulatedRewards() {
     try{
         var rewards = nftstake.methods.calculateTokens().call({
@@ -41,6 +48,7 @@ async function stakeNFT() {
         document.getElementById('message').innerText = 'NFT staked successfully!';
         globalStaked();
         staked();
+        idHeld();
     } catch (error) {
         console.error("An error occurred:", error);
         document.getElementById('message').innerText = 'Error staking NFT!';
@@ -58,6 +66,7 @@ async function unstakeNFT() {
         document.getElementById('message').innerText = 'NFT unstaked!';
         globalStaked();
         staked();
+        idHeld();
     } catch (error) {
         console.error("an error occurred:", error);
         document.getElementById('message').innerText = 'Unable to unstake!';
@@ -106,3 +115,4 @@ async function numberHeld() {
 setInterval(accumulatedRewards, 5000);
 setInterval(numberHeld, 5000);
 setInterval(globalStaked, 30000);
+setInterval(idHeld, 60000);
