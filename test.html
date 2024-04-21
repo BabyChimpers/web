@@ -194,7 +194,7 @@
         const nftContract = new web3.eth.Contract(nftabi, nftContractAddress);
 
         // Store connected account globally
-        let connectedAccount;
+        var connectedAccount = null;
 
         // Handle Connect Wallet button click
         document.getElementById('connectButton').addEventListener('click', async () => {
