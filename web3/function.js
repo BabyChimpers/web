@@ -7,6 +7,8 @@ async function stakeNFT() {
         await nftstake.methods.stake(nftID).send({
             from: connectedAccount, // Use the global connected account
             value: 0 // Specify any additional value if required
+        }).then(function(result){
+            document.getElementById('message').innerText = 'Staking NFT...';
         });
         console.log("Staked NFT ID:", nftID);
         // Handle successful staking
@@ -22,6 +24,8 @@ async function unstakeNFT() {
     try {
         await nftstake.methods.unstake(nftID).send({
             from: connectedAccount
+        }).then(function(result){
+            document.getElementById('message').innerText = 'Unstaking nft...';
         });
         console.log("unStaked NFT ID:", nftID);
         document.getElementById('message').innerText = 'NFT unstaked!';
