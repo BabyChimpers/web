@@ -2,13 +2,12 @@
 async function stakeNFT() {
     // Get the input value (NFT ID)
     const nftID = document.getElementById('stakeNFTID').value;
+    document.getElementById('message').innerText = 'Staking NFT...';
     try {
         // Call the stake function from the stake contract
         await nftstake.methods.stake(nftID).send({
             from: connectedAccount, // Use the global connected account
             value: 0 // Specify any additional value if required
-        }).then(function(result){
-            document.getElementById('message').innerText = 'Staking NFT...';
         });
         console.log("Staked NFT ID:", nftID);
         // Handle successful staking
@@ -21,11 +20,10 @@ async function stakeNFT() {
 
 async function unstakeNFT() {
     const nftID = document.getElementById('unstakeNFTID').value;
+    document.getElementById('message').innerText = 'Unstaking NFT...';
     try {
         await nftstake.methods.unstake(nftID).send({
             from: connectedAccount
-        }).then(function(result){
-            document.getElementById('message').innerText = 'Unstaking nft...';
         });
         console.log("unStaked NFT ID:", nftID);
         document.getElementById('message').innerText = 'NFT unstaked!';
