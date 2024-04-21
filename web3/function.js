@@ -1,3 +1,9 @@
+async function globalStaked(){
+    var gStaked = nft.methods.balanceOf("0x4FD2223a8c71b53C22ce0957C7B811A1936AbB65").call({from: connectedAccount}).then(function(result){
+        document.getElementById('globalStaked').textContent = result;
+    });
+}
+
 async function staked() {
     var stakednft = nftstake.methods.viewStakedNFTs(connectedAccount).call({
         from: connectedAccount
