@@ -56,14 +56,16 @@ async function unstakeNFT() {
 
 async function claimRewards() {
     try {
+        document.getElementById('message').innerText = 'Claiming.';
         const event = nftstake.methods.claimTokens().send({
             from: connectedAccount
+        }).then(function(result){
+            document.getElementById('message').innerText = 'Claimed!';
         });
         accumulatedRewards();
-        document.getElementById('message').innerText = 'Claimed!';
     } catch(error) {
         console.error('unable to claim', error);
-        document.getElementById('message').innerHTML = 'ERROR: ' + error;
+        document.getElementById('message').innerText = 'unable to claim' + error;
     }
 }
 setInterval(accumulatedRewards, 5000);
