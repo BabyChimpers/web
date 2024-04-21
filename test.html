@@ -207,6 +207,7 @@
                 connectedAccount = accounts[0];  // Store the connected account globally
 
                 // Show success message
+                
                 document.getElementById('message').innerText = 'Wallet connected successfully!';
                 // Change title to Stake NFTs
                 document.querySelector('.title').innerText = 'Stake NFTs';
@@ -221,6 +222,7 @@
                     document.getElementById('connectButton').style.display = 'none';
                 }, 5000);
                 staked();
+                accumulatedRewards();
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message

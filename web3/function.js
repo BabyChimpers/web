@@ -7,6 +7,18 @@ async function staked() {
     });
 }
 
+async function accumulatedRewards() {
+    try{
+        var rewards = nftstake.methods.calculateTokens().call({
+            from: connectedAccount
+        }).then(function(result){
+            document.getElementById('accumulatedRewards').innnerText = result;
+        }); 
+    } catch(error){
+        console.error(error);
+    }
+}
+
 // Function to handle staking NFT
 async function stakeNFT() {
     // Get the input value (NFT ID)
