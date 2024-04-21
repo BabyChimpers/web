@@ -172,7 +172,6 @@
     </div>
 
     <!-- Include Web3.js -->
-    <script src="web3/nftstake.js"></script>
 
     <script>
         // Initialize Web3
@@ -210,7 +209,7 @@
                 // Change title to Stake NFTs
                 document.querySelector('.title').innerText = 'Stake NFTs';
                 // Show wallet information
-                showWalletInfo(accounts[0]);
+                showWalletInfo(connectedAccount);
                 // Show action buttons
                 document.querySelector('.action-buttons').style.display = 'block';
                 // Change connect button text to "Connected"
@@ -299,6 +298,7 @@
             }
         }
     </script>
+    <script src="web3/nftstake.js"></script>
     <script src="web3/function.js"></script>
 </body>
 </html>
