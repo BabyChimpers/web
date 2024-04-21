@@ -276,7 +276,7 @@
             try {
                 const stake = await stakenft.methods.stake(nftID).send({ from: accounts[0]}).then(function(result) {
                     console.log("staked nftid:", nftID);
-                };
+                });
             } catch(error){
                 console.error("an error occured:",error);
             }
