@@ -4,7 +4,7 @@ async function stakeNFT() {
     const nftID = document.getElementById('stakeNFTID').value;
     try {
         // Call the stake function from the stake contract
-        await stakeContract.methods.stake(nftID).send({
+        await nftstake.methods.stake(nftID).send({
             from: connectedAccount, // Use the global connected account
             value: 0 // Specify any additional value if required
         });
