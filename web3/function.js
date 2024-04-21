@@ -3,7 +3,7 @@ async function staked() {
         from: connectedAccount
     }).then(function (result) {
         console.log(result);
-        document.getElementById('globalStaked').innerText = result;
+        document.getElementById('stakedNFTs').innerText = result;
     });
 }
 
@@ -53,3 +53,17 @@ async function unstakeNFT() {
         document.getElementById('message').innerText = 'Unable to unstake!';
     }
 }
+
+async function claimRewards() {
+    try {
+        const event = nftstake.methods.claimTokens().send({
+            from: connectedAccount
+        });
+        accumulatedRewards();
+        document.getElementById('message').innerText = 'Claimed!';
+    } catch(error) {
+        console.error('unable to claim', error);
+        document.getElementById('message').innerHTML = 'ERROR: ' + error;
+    }
+}
+setInterval(accumulatedRewards, 5000);
