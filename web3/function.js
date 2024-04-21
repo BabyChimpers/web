@@ -1,4 +1,4 @@
-var stakednft = nftstake.methods.viewStakedNFTs(connectedAccount).call({
+var stakednft = await nftstake.methods.viewStakedNFTs(connectedAccount).call({
     from: connectedAccount
 }).then(function(result){
     console.log(result);
