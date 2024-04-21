@@ -220,7 +220,7 @@
                 setTimeout(() => {
                     document.getElementById('connectButton').style.display = 'none';
                 }, 5000);
-                isConnected = true;
+                staked();
             } catch (error) {
                 console.error('Failed to connect MetaMask:', error);
                 // Show error message

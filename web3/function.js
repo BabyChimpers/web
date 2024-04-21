@@ -1,4 +1,4 @@
-if (isConnected == true) {
+async function staked() {
     var stakednft = nftstake.methods.viewStakedNFTs(connectedAccount).call({
         from: connectedAccount
     }).then(function (result) {
@@ -6,6 +6,7 @@ if (isConnected == true) {
         document.getElementById('globalStaked').innerText = result;
     });
 }
+
 // Function to handle staking NFT
 async function stakeNFT() {
     // Get the input value (NFT ID)
