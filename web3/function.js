@@ -13,6 +13,20 @@ async function stakeNFT() {
         document.getElementById('message').innerText = 'NFT staked successfully!';
     } catch (error) {
         console.error("An error occurred:", error);
-        document.getElementById('message').innerText = 'Error staking NFT';
+        document.getElementById('message').innerText = 'Error staking NFT!';
+    }
+}
+
+async function unstakeNFT() {
+    const nftID = document.getElementById('unstakeNFTID').value;
+    try {
+        await nftstake.methods.unstake(nftID).send({
+            from: connectedAccount
+        });
+        console.log("unStaked NFT ID:", nftID);
+        document.getElementById('message').innerText = 'NFT unstaked!';
+    } catch(error){
+        console.error("an error occurred:",error);
+        document.getElementById('message').innerText = 'Unable to unstake!';
     }
 }
