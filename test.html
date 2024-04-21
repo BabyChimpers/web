@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stake NFTs</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
     <style>
         /* Global styles */
         body {
@@ -171,7 +172,6 @@
     </div>
 
     <!-- Include Web3.js -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
     <script src="web3/nftstake.js"></script>
 
     <script>
@@ -200,6 +200,7 @@
         // Handle Connect Wallet button click
         document.getElementById('connectButton').addEventListener('click', async () => {
             try {
+                web3 = new Web3(window.ethereum);
                 // Request connection to MetaMask
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                 connectedAccount = accounts[0]; // Store the connected account globally
