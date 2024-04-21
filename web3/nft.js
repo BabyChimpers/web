@@ -1184,4 +1184,4 @@ var nft = new web3.eth.Contract([
         "stateMutability": "view",
         "type": "function"
     }
-], "0x73FfF481C86B73Ab0b0907f0AaCb262eD9ae4807");
+], "0x1f765B3cfFfFc7ee90449DBAff4Cb6edC843E312");

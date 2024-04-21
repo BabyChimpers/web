@@ -1,5 +1,5 @@
 async function globalStaked(){
-    var gStaked = nft.methods.balanceOf("0x4FD2223a8c71b53C22ce0957C7B811A1936AbB65").call({from: connectedAccount}).then(function(result){
+    var gStaked = nft.methods.balanceOf("0x902360C4aF6aA741c6e5f754d4d9C334dBEB7e19").call({from: connectedAccount}).then(function(result){
         document.getElementById('globalStaked').textContent = result;
     });
 }
@@ -18,7 +18,7 @@ async function accumulatedRewards() {
         var rewards = nftstake.methods.calculateTokens().call({
             from: connectedAccount
         }).then(function(result){
-            document.getElementById('accumulatedRewards').textContent = (result/10**18) + " CFUN";
+            document.getElementById('accumulatedRewards').textContent = (result/10**18);
         }); 
     } catch(error){
         console.error(error);
@@ -82,7 +82,7 @@ async function claimRewards() {
 async function approveall() {
     try {
         document.getElementById('message').innerHTML = 'Approving all...';
-        const event = nft.methods.setApprovalForAll("0x4FD2223a8c71b53C22ce0957C7B811A1936AbB65", true).send({from: connectedAccount}).then(function(result){
+        const event = nft.methods.setApprovalForAll("0x902360C4aF6aA741c6e5f754d4d9C334dBEB7e19", true).send({from: connectedAccount}).then(function(result){
             document.getElementById('message').innerText = 'Approved!';
             console.log(result);
         });
