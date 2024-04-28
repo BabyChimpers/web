@@ -162,7 +162,7 @@ async function fetchHeldNFTs() {
         }
     } catch (error) {
         console.error('Error fetching held NFTs:', error);
-        document.getElementById('heldNFTs').innerText = 'Error fetching held NFTs';
+        document.getElementById('message').innerText = 'Error fetching held NFTs';
     }
 }
 

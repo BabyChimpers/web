@@ -16,6 +16,7 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            /* Prevent horizontal scrollbar */
         }
 
         .container {
@@ -82,6 +83,7 @@
             text-align: left;
             display: none;
             overflow-wrap: break-word;
+            /* Wrap long text */
         }
 
         .wallet-info p {
@@ -139,6 +141,70 @@
             margin-top: 20px;
             background-color: #f0f0f0;
             text-align: center;
+        }
+
+        /* NFT card styles */
+        .nft-card {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+
+        /* NFT card item */
+        .nft-card-item {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .nft-card-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .nft-card-item p {
+            margin-top: 5px;
+        }
+
+        /* Held NFTs styles */
+        #heldNFTSection {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        #heldNFTSection h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #heldNFTSection .nft-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        #heldNFTSection .nft-card {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #heldNFTSection .nft-card img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        #heldNFTSection .nft-card p {
+            margin-top: 10px;
         }
     </style>
 </head>
