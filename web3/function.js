@@ -131,12 +131,12 @@ async function fetchHeldNFTs() {
 
         // Clear previous NFT cards
         const nftCardContainer = document.getElementById('heldNFTCards');
-        nftCardContainer.innerHTML = 'Loading..';
+        nftCardContainer.innerHTML = '';
 
         // Loop through held NFT IDs and create cards
         for (const nftID of heldNFTs) {
             // Fetch NFT image URL (Replace this with your logic to fetch image URL)
-            const nftImageURL = 'https://byzantion.mypinata.cloud/ipfs/bafybeia6ovkoznh2v3ihea7ce2lbbr2wyh6w4nit66hvifqtickwdouqgm/' + nftID + '.png';
+            const nftImageURL = 'https://cloudflare-ipfs.com/ipfs/bafybeia6ovkoznh2v3ihea7ce2lbbr2wyh6w4nit66hvifqtickwdouqgm/' + nftID + '.png';
 
             // Create NFT card element
             const nftCard = document.createElement('div');
