@@ -150,9 +150,33 @@ async function fetchHeldNFTs() {
             const nftIDElement = document.createElement('p');
             nftIDElement.innerText = `NFT ID: ${nftID}`;
 
+            // Create "Stake" button
+            const stakeButton = document.createElement('button');
+            stakeButton.innerText = 'Stake';
+            stakeButton.onclick = async function () {
+                document.getElementById('message').innerText = 'Staking NFT...';
+                try {
+                    // Call the stake function from the stake contract
+                    await nftstake.methods.stake(nftID).send({
+                        from: connectedAccount, // Use the global connected account
+                        value: 0 // Specify any additional value if required
+                    });
+                    console.log("Staked NFT ID:", nftID);
+                    // Handle successful staking
+                    document.getElementById('message').innerText = 'NFT staked successfully!';
+                    globalStaked();
+                    staked();
+                    idHeld();
+                } catch (error) {
+                    console.error("An error occurred:", error);
+                    document.getElementById('message').innerText = 'Error staking NFT!';
+                }
+            };
+
             // Append elements to the card
             nftCard.appendChild(nftImage);
             nftCard.appendChild(nftIDElement);
+            nftCard.appendChild(stakeButton);
 
             // Append card to the card container
             nftCardContainer.appendChild(nftCard);
