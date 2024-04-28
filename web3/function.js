@@ -1,5 +1,5 @@
-async function globalStaked(){
-    var gStaked = nft.methods.balanceOf("0x902360C4aF6aA741c6e5f754d4d9C334dBEB7e19").call({from: connectedAccount}).then(function(result){
+async function globalStaked() {
+    var gStaked = nft.methods.balanceOf("0x902360C4aF6aA741c6e5f754d4d9C334dBEB7e19").call({ from: connectedAccount }).then(function (result) {
         document.getElementById('globalStaked').textContent = result;
     });
 }
@@ -14,20 +14,20 @@ async function staked() {
 }
 
 async function idHeld() {
-    var held = nft.methods.ownedNFTIdList(connectedAccount).call({from: connectedAccount}).then(function(result){
+    var held = nft.methods.ownedNFTIdList(connectedAccount).call({ from: connectedAccount }).then(function (result) {
         console.log(result);
         document.getElementById('idHeld').textContent = result;
     });
 }
 
 async function accumulatedRewards() {
-    try{
+    try {
         var rewards = nftstake.methods.calculateTokens().call({
             from: connectedAccount
-        }).then(function(result){
-            document.getElementById('accumulatedRewards').textContent = (result/10**18);
-        }); 
-    } catch(error){
+        }).then(function (result) {
+            document.getElementById('accumulatedRewards').textContent = (result / 10 ** 18);
+        });
+    } catch (error) {
         console.error(error);
     }
 }
@@ -78,11 +78,11 @@ async function claimRewards() {
         document.getElementById('message').innerText = 'Claiming.';
         const event = nftstake.methods.claimTokens().send({
             from: connectedAccount
-        }).then(function(result){
+        }).then(function (result) {
             document.getElementById('message').innerText = 'Claimed!';
         });
         accumulatedRewards();
-    } catch(error) {
+    } catch (error) {
         console.error('unable to claim: ', error);
         document.getElementById('message').innerText = 'unable to claim';
     }
@@ -91,11 +91,11 @@ async function claimRewards() {
 async function approveall() {
     try {
         document.getElementById('message').innerHTML = 'Approving all...';
-        const event = nft.methods.setApprovalForAll("0x902360C4aF6aA741c6e5f754d4d9C334dBEB7e19", true).send({from: connectedAccount}).then(function(result){
+        const event = nft.methods.setApprovalForAll("0x902360C4aF6aA741c6e5f754d4d9C334dBEB7e19", true).send({ from: connectedAccount }).then(function (result) {
             document.getElementById('message').innerText = 'Approved!';
             console.log(result);
         });
-    } catch(error) {
+    } catch (error) {
         console.error('unable to approve: ', error);
         document.getElementById('message').innerText = 'Error approving!';
     }
@@ -103,14 +103,69 @@ async function approveall() {
 
 async function numberHeld() {
     try {
-        const event = nft.methods.balanceOf(connectedAccount).call({ from: connectedAccount}).then(function(result){
+        const event = nft.methods.balanceOf(connectedAccount).call({ from: connectedAccount }).then(function (result) {
             console.log(result);
             document.getElementById('numberHeld').textContent = result;
         });
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
+
+// Function to toggle display of held NFT section
+function toggleHeldNFTSection() {
+    // Toggle visibility of held NFT section
+    const heldNFTSection = document.getElementById('heldNFTSection');
+    heldNFTSection.style.display = heldNFTSection.style.display === 'block' ? 'none' : 'block';
+
+    if (heldNFTSection.style.display === 'block') {
+        fetchHeldNFTs();
+    }
+}
+
+// Function to fetch and display held NFTs
+async function fetchHeldNFTs() {
+    try {
+        // Call the `walletOfOwner` function from the NFT contract
+        const heldNFTs = await nft.methods.ownedNFTIdList(connectedAccount).call();
+
+        // Clear previous NFT cards
+        const nftCardContainer = document.getElementById('heldNFTCards');
+        nftCardContainer.innerHTML = '';
+
+        // Loop through held NFT IDs and create cards
+        for (const nftID of heldNFTs) {
+            // Fetch NFT image URL (Replace this with your logic to fetch image URL)
+            const tokenURI = await nft.methods.tokenURI(nftID).call();
+            const response = await fetch(tokenURI);
+            const data = await response.json();
+            const nftImageURL = data.image;
+
+            // Create NFT card element
+            const nftCard = document.createElement('div');
+            nftCard.className = 'nft-card-item';
+
+            // Create image element
+            const nftImage = document.createElement('img');
+            nftImage.src = nftImageURL;
+
+            // Create NFT ID element
+            const nftIDElement = document.createElement('p');
+            nftIDElement.innerText = `NFT ID: ${nftID}`;
+
+            // Append elements to the card
+            nftCard.appendChild(nftImage);
+            nftCard.appendChild(nftIDElement);
+
+            // Append card to the card container
+            nftCardContainer.appendChild(nftCard);
+        }
+    } catch (error) {
+        console.error('Error fetching held NFTs:', error);
+        document.getElementById('heldNFTs').innerText = 'Error fetching held NFTs';
+    }
+}
+
 
 setInterval(accumulatedRewards, 5000);
 setInterval(numberHeld, 5000);

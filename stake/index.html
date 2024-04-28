@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,16 +17,19 @@
             padding: 0;
             overflow-x: hidden;
         }
+
         .container {
             text-align: center;
             max-width: 600px;
             margin: auto;
             padding: 20px;
         }
+
         h1 {
             margin-bottom: 20px;
             font-family: Pixelify Sans, sans-serif;
         }
+
         button {
             padding: 10px 20px;
             background-color: #007bff;
@@ -36,17 +40,21 @@
             margin-top: 10px;
             font-family: "Pixelify Sans", sans-serif;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         input[type="text"] {
             padding: 8px;
             border-radius: 4px;
             border: 1px solid #ccc;
         }
+
         input[type="text"]:focus {
             border-color: #007bff;
         }
+
         /* Header styles */
         header {
             background-color: #333;
@@ -58,10 +66,12 @@
             right: 0;
             z-index: 1000;
         }
+
         .title {
             font-size: 24px;
             font-weight: bold;
         }
+
         /* Wallet info styles */
         .wallet-info {
             background-color: #f9f9f9;
@@ -73,17 +83,21 @@
             display: none;
             overflow-wrap: break-word;
         }
+
         .wallet-info p {
             margin: 5px 0;
         }
+
         .wallet-info h2 {
             text-align: center;
         }
+
         /* Action buttons styles */
         .action-buttons {
             margin-top: 20px;
             display: none;
         }
+
         /* NFT input styles */
         .nft-input {
             margin-top: 20px;
@@ -93,11 +107,13 @@
             background-color: #fff;
             display: none;
         }
+
         /* Dashboard styles */
         .dashboard {
             margin-top: 20px;
             display: none;
         }
+
         .dashboard-content {
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -106,13 +122,16 @@
             margin-top: 20px;
             background-color: #f9f9f9;
         }
+
         .dashboard-content h2 {
             text-align: center;
         }
+
         .dashboard-section h3 {
             text-align: center;
             margin-bottom: 10px;
         }
+
         .dashboard-context {
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -123,6 +142,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -170,6 +190,13 @@
                 </div>
             </div>
         </div>
+        <!-- Section to display held NFTs -->
+        <div id="heldNFTSection">
+            <h3>Held NFTs</h3>
+            <div class="nft-card" id="heldNFTCards">
+                <!-- NFT cards will be inserted here dynamically -->
+            </div>
+        </div>
     </div>
 
     <!-- Include Web3.js -->
@@ -194,11 +221,11 @@
                 web3 = new Web3(window.ethereum);
                 // Request connection to MetaMask
                 await window.ethereum.request({ method: 'eth_requestAccounts' });
-                var accounts = await web3.eth.getAccounts(); 
+                var accounts = await web3.eth.getAccounts();
                 connectedAccount = accounts[0];  // Store the connected account globally
 
                 // Show success message
-                
+
                 document.getElementById('message').innerText = 'Wallet connected successfully!';
                 // Change title to Stake NFTs
                 document.querySelector('.title').innerText = 'Stake NFTs';
@@ -266,4 +293,5 @@
     <script src="../web3/nft.js"></script>
     <script src="../web3/function.js"></script>
 </body>
+
 </html>
